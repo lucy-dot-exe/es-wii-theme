@@ -69,7 +69,7 @@ theme.xml's carousel and frame and the generator's layout constants have to chan
 the grid's `<imagegrid>` and its slots.
 
 The grid shows each game's `image`, which ES's scraper fills with a screenshot (and `thumbnail` with the box art),
-cropped to fill the tile, and plays the selected game's video in it the same way after a second and a half. The
+cropped to fill the tile, and plays the selected game's video in it the same way after 0.3 seconds. The
 art's corners are rounded by an overlay painted in the frame's color: with `roundCorners` on the art itself, ES
 doesn't draw the video.
 
