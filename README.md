@@ -49,6 +49,10 @@ the theme works straight from the repository. The colors are in both `generator/
 
 - `art/<system>.png`: the system's channel in the carousel (384×196, twice its size at 640×480). `<system>` is
   the name in `<theme>` in ArkOS's `es_systems.cfg`. A system without a channel shows its name instead.
+- `art/<system>.mp4`: the channel's animation, a three-second loop in which its picture bobs and a shine crosses
+  it, like the Wii's channels that never stand still. The system view plays the selected system's over its
+  channel once the carousel stops; its first frame is `art/<system>.png`, so it fades in without a jump. The
+  generator makes them with ffmpeg, so it needs it (`brew install ffmpeg`).
 - `art/<system>-header.png`: the band across the top of the system's game list (640×60, with its shadow).
 - `assets/menu.png`: the system view's background, with the empty slots and the dock. It and `assets/frame.png`
   (the blue frame) are `extra="static"`, so they stay still while the channels slide.
