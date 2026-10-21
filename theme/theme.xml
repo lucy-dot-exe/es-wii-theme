@@ -81,6 +81,7 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <size>0.30 0.2042</size>
       <path>./art/${system.theme}.mp4</path>
       <delay>0.5</delay>
+      <effect>none</effect>
       <zIndex>42</zIndex>
     </video>
 
@@ -189,7 +190,9 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <zIndex>10</zIndex>
     </image>
 
+    <!-- effect none: ES zooms a video in with a little bump as it starts, unless told otherwise. -->
     <video name="md_video">
+      <effect>none</effect>
       <origin>0.5 0.5</origin>
       <pos>0.7773 0.325</pos>
       <maxSize>0.355 0.30</maxSize>
@@ -268,6 +271,10 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     <image name="gridtile.overlay:selected">
       <color>34BEEDFF</color>
     </image>
+    <!-- No bump as the selected tile's video starts. -->
+    <video name="gridtile.video">
+      <effect>none</effect>
+    </video>
     <text name="md_name">
       <pos>0.20 0.80</pos>
       <size>0.60 0.06</size>
