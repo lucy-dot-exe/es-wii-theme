@@ -2,7 +2,7 @@
 <!--
 Theme:   Wii
 Made for ArkOS's EmulationStation at 640x480 (R36S, RG351V, RGB10S, ...), in the style of the Wii's menu.
-The images in art/ and assets/ are drawn by ../generator. Change them there, not here.
+The images in art/ and assets/ are drawn by generator/. Change them there, not here.
 -->
 <!-- defaultView: game lists open as the grid of channels, unless UI Settings picks another view. -->
 <theme defaultView="grid">

@@ -25,8 +25,14 @@ macOS, not taken on the console. It's been tried on an R36S, where it looks the 
 
 ## Installing
 
-Run `./build.sh`. It makes `dist/es-wii-theme.zip`. Unzip it into the `themes` folder on the card's `EASYROMS`
-partition.
+The repository is the theme: `theme.xml` is at its top, with `art/`, `assets/` and `fonts/` beside it. Either:
+
+- install it with [ThemeMaster](https://github.com/JohnIrvine1433/ThemeMaster) on the console, or
+- download it from GitHub (**Code → Download ZIP**) and unzip it into the `themes` folder on the card's
+  `EASYROMS` partition, so that it's `themes/es-wii-theme/theme.xml` (rename the folder from `es-wii-theme-main`
+  if you like; ES shows the folder's name).
+
+`./build.sh` makes a smaller zip with only the theme's files, `dist/es-wii-theme.zip`.
 
 On the console, pick it in **Start → UI Settings → Theme Set**.
 
@@ -34,8 +40,8 @@ On the console, pick it in **Start → UI Settings → Theme Set**.
 
 | Folder | What's in it |
 | --- | --- |
-| [theme/](theme/) | The theme, as it goes on the card: `theme.xml`, the fonts and the images |
-| [generator/](generator/) | A Go program that draws every image in `theme/art/` and `theme/assets/` |
+| [theme.xml](theme.xml), [art/](art/), [assets/](assets/), [fonts/](fonts/) | The theme, as it goes on the card |
+| [generator/](generator/) | A Go program that draws every image in `art/` and `assets/` |
 | [previews/](previews/) | The screenshots above |
 
 EmulationStation's SVG renderer can't draw text, so the channels are PNGs with the text drawn on them. They are
@@ -45,7 +51,7 @@ system ArkOS lists and per ES collection (all games,
 favorites, last played, ...), with its short name, maker, full name and color.
 
 To change the art, change the generator and run it (`cd generator && go run .`). The images are committed, so
-the theme works straight from the repository. The colors are in both `generator/main.go` and `theme/theme.xml`.
+the theme works straight from the repository. The colors are in both `generator/main.go` and `theme.xml`.
 
 - `art/<system>.png`: the system's channel in the carousel (384×196, twice its size at 640×480). `<system>` is
   the name in `<theme>` in ArkOS's `es_systems.cfg`. A system without a channel shows its name instead.
@@ -75,6 +81,6 @@ doesn't draw the video.
 ## Credits
 
 The font is [M PLUS Rounded 1c](https://fonts.google.com/specimen/M+PLUS+Rounded+1c) by the Rounded M+ Project,
-under the SIL Open Font License ([theme/fonts/OFL.txt](theme/fonts/OFL.txt)), cut down to its Latin letters and
+under the SIL Open Font License ([fonts/OFL.txt](fonts/OFL.txt)), cut down to its Latin letters and
 symbols. Everything else is drawn by the generator. The channels use system names, never the makers' logos, and
 nothing is taken from the Wii itself.

@@ -25,7 +25,7 @@ import (
 )
 
 const (
-	themeDir = "../theme"
+	themeDir = ".." // the theme is the repository itself, so a GitHub zip of it installs as is
 	ss       = 3 // images are drawn this many times bigger and scaled down, for smooth edges
 )
 
