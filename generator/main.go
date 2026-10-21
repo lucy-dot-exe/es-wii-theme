@@ -95,6 +95,7 @@ func main() {
 	save(filepath.Join(themeDir, "assets", "noart.png"), noArt(300, 300))
 	save(filepath.Join(themeDir, "assets", "tile.png"), gameTile(false))
 	save(filepath.Join(themeDir, "assets", "tile-selected.png"), gameTile(true))
+	save(filepath.Join(themeDir, "assets", "tile-corners.png"), tileCorners())
 	save(filepath.Join(themeDir, "assets", "noart-tile.png"), noArtTile(282, 156))
 	fmt.Printf("drew %d systems\n", len(systems))
 }
@@ -210,6 +211,21 @@ func gameTile(selected bool) image.Image {
 	if selected {
 		c.ring(0, 0, n, n, r, 3, blue)
 	}
+	return c.done()
+}
+
+// tileCorners goes over a grid tile's art and video (theme.xml's gridtile.overlay): white in the four corners
+// outside a rounded rectangle, nothing elsewhere, so the art looks rounded inside the frame. theme.xml tints it
+// blue on the selected tile, to match the outline. Drawn at twice the art's size at 640×480 (the tile less its
+// 3-pixel padding).
+func tileCorners() image.Image {
+	const k = 2
+	w := (gridW-gridMarginX*(gridCols-1))/gridCols - 6
+	h := float64(gridH-gridMarginY*(gridRows-1))/gridRows - 6
+	W, H := math.Round(w*k), math.Round(h*k)
+	c := newCanvas(int(W), int(H))
+	inside := inRoundRect(0, 0, W, H, 4*k)
+	c.fill(0, 0, W, H, func(x, y float64) bool { return !inside(x, y) }, solid(white))
 	return c.done()
 }
 

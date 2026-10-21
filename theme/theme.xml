@@ -235,7 +235,7 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <folderImage>./assets/noart-tile.png</folderImage>
     </imagegrid>
     <!-- minSize: the art and the video fill the tile, cropped, inside a 3-pixel frame (tile.png). The art can't
-         have roundCorners, because ES then doesn't draw the tile's video. -->
+         have roundCorners, because ES then doesn't draw the tile's video: gridtile.overlay rounds it instead. -->
     <gridtile name="default">
       <padding>3 3 3 3</padding>
       <backgroundImage>./assets/tile.png</backgroundImage>
@@ -247,6 +247,14 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     <gridtile name="selected">
       <backgroundImage>./assets/tile-selected.png</backgroundImage>
     </gridtile>
+    <!-- Rounds the art's and the video's corners by covering them in the frame's color: white, or blue (34BEED)
+         on the selected tile. -->
+    <image name="gridtile.overlay">
+      <path>./assets/tile-corners.png</path>
+    </image>
+    <image name="gridtile.overlay:selected">
+      <color>34BEEDFF</color>
+    </image>
     <text name="md_name">
       <pos>0.20 0.80</pos>
       <size>0.60 0.06</size>

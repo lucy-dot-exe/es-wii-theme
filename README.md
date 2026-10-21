@@ -54,7 +54,8 @@ the theme works straight from the repository. The colors are in both `generator/
   (the blue frame) are `extra="static"`, so they stay still while the channels slide.
 - `assets/gamelist.png` (with the two panels) and `assets/grid.png` (with an empty slot under each of the grid's
   tiles): the game lists' backgrounds.
-- `assets/tile.png` and `assets/tile-selected.png`: the nine-patches behind a game in the grid, and
+- `assets/tile.png` and `assets/tile-selected.png`: the nine-patches behind a game in the grid,
+  `assets/tile-corners.png`: drawn over its art and video to round their corners (tinted blue when selected), and
   `assets/noart-tile.png` for a game without art there.
 - `assets/selector.png` (the pill behind the selected game) and `assets/noart.png` (for games without art).
 
@@ -64,7 +65,8 @@ the grid's `<imagegrid>` and its slots.
 
 The grid shows each game's `image`, which ES's scraper fills with a screenshot (and `thumbnail` with the box art),
 cropped to fill the tile, and plays the selected game's video in it the same way after a second and a half. The
-art has square corners inside the tile's rounded bezel: with `roundCorners` on it, ES doesn't draw the video.
+art's corners are rounded by an overlay painted in the frame's color: with `roundCorners` on the art itself, ES
+doesn't draw the video.
 
 ## Credits
 
