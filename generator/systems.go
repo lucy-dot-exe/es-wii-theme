@@ -10,8 +10,8 @@ type System struct {
 	Color uint32 // the channel's color, 0xRRGGBB
 }
 
-// The systems ArkOS lists, the same ones portable-helper's systems.go knows, and ES's collections. Each maker's
-// systems share a family of colors, so the carousel groups by color as well as by name.
+// The systems ArkOS lists in its es_systems.cfg, and ES's collections. Each maker's systems share a family of
+// colors, so the carousel groups by color as well as by name.
 var systems = []System{
 	// Nintendo
 	{"nes", "NES", "Nintendo", "Entertainment System", 0xC8102E},

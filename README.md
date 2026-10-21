@@ -1,6 +1,6 @@
-# es-theme-cartridge
+# es-wii-theme
 
-**Cartridge** is an EmulationStation theme for ArkOS on 640×480 handhelds like the **R36S**, made to be
+**Wii** is an EmulationStation theme for ArkOS on 640×480 handhelds like the **R36S**, made to be
 added to [Jetup13's EmulationStation OGA Theme Gallery](https://github.com/Jetup13/Emulationstation-OGA-Theme-Gallery)
 like the themes already there.
 
@@ -19,15 +19,14 @@ the games in a white panel with a light blue selector, and the box art and descr
 | --- | --- | --- |
 | ![](previews/system.png) | ![](previews/grid.png) | ![](previews/gamelist.png) |
 
-The previews are screenshots of ArkOS's EmulationStation built for macOS (see [es-preview](../es-preview/)), not
-from the console.
+The previews are screenshots of ArkOS's own EmulationStation
+([EmulationStation-fcamod](https://github.com/christianhaitian/EmulationStation-fcamod), `351v` branch) built for
+macOS, not taken on the console.
 
 ## Installing
 
-Run `./build.sh`. It makes `dist/es-theme-cartridge.zip`. Then either:
-
-- add the zip with [portable-helper](../portable-helper/) (**Themes → Add theme**), or
-- unzip it into the `themes` folder on the card's `EASYROMS` partition.
+Run `./build.sh`. It makes `dist/es-wii-theme.zip`. Unzip it into the `themes` folder on the card's `EASYROMS`
+partition.
 
 On the console, pick it in **Start → UI Settings → Theme Set**.
 
@@ -42,7 +41,7 @@ On the console, pick it in **Start → UI Settings → Theme Set**.
 EmulationStation's SVG renderer can't draw text, so the channels are PNGs with the text drawn on them. They are
 drawn from the table in [generator/systems.go](generator/systems.go), with the pictures in
 [generator/icons.go](generator/icons.go) (built from shapes: a system without one gets a cartridge): one row per
-system ArkOS lists (the same systems as portable-helper's `systems.go`) and per ES collection (all games,
+system ArkOS lists and per ES collection (all games,
 favorites, last played, ...), with its short name, maker, full name and color.
 
 To change the art, change the generator and run it (`cd generator && go run .`). The images are committed, so

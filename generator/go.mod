@@ -1,4 +1,4 @@
-module es-theme-cartridge/generator
+module es-wii-theme/generator
 
 go 1.27.1
 
