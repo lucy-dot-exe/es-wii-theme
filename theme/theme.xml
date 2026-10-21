@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Theme:   Cartridge
+Made for ArkOS's EmulationStation at 640x480 (R36S, RG351V, RGB10S, ...).
+The images in art/ and assets/ are drawn by ../generator. Change them there, not here.
+-->
+<theme>
+  <formatVersion>7</formatVersion>
+
+  <view name="screen">
+    <text name="clock">
+      <pos>0.70 0.025</pos>
+      <size>0.27 0.05</size>
+      <alignment>right</alignment>
+      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontSize>0.035</fontSize>
+      <color>9A9DB0</color>
+    </text>
+  </view>
+
+  <view name="menu">
+    <menuBackground name="menubg">
+      <color>1E2030</color>
+    </menuBackground>
+    <menuText name="menutitle">
+      <fontPath>./fonts/Lato-Black.ttf</fontPath>
+      <fontSize>0.05</fontSize>
+      <color>F4F1EA</color>
+    </menuText>
+    <menuText name="menutext">
+      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontSize>0.04</fontSize>
+      <color>F4F1EA</color>
+      <selectorColor>F5B841</selectorColor>
+      <selectedColor>12131C</selectedColor>
+      <separatorColor>2E3145</separatorColor>
+    </menuText>
+    <menuTextSmall name="menutextsmall">
+      <fontPath>./fonts/Lato-Regular.ttf</fontPath>
+      <fontSize>0.03</fontSize>
+      <color>9A9DB0</color>
+    </menuTextSmall>
+    <menuText name="menufooter">
+      <fontPath>./fonts/Lato-Regular.ttf</fontPath>
+      <fontSize>0.03</fontSize>
+      <color>9A9DB0</color>
+    </menuText>
+  </view>
+
+  <!-- The system carousel. Each system's card is art/<system>.png; a system without one shows its name instead. -->
+  <view name="system">
+    <image name="background" extra="true">
+      <pos>0 0</pos>
+      <size>1 1</size>
+      <path>./assets/background.png</path>
+      <zIndex>0</zIndex>
+    </image>
+
+    <carousel name="systemcarousel">
+      <type>horizontal</type>
+      <pos>0 0.20</pos>
+      <size>1 0.50</size>
+      <color>00000000</color>
+      <logoSize>0.28 0.175</logoSize>
+      <logoScale>1.3</logoScale>
+      <maxLogoCount>3</maxLogoCount>
+      <zIndex>40</zIndex>
+    </carousel>
+
+    <image name="logo">
+      <path>./art/${system.theme}.png</path>
+    </image>
+
+    <text name="logoText">
+      <fontPath>./fonts/Lato-Black.ttf</fontPath>
+      <fontSize>0.07</fontSize>
+      <color>F4F1EA</color>
+      <forceUppercase>true</forceUppercase>
+    </text>
+
+    <text name="systemInfo">
+      <pos>0 0.70</pos>
+      <size>1 0.06</size>
+      <alignment>center</alignment>
+      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontSize>0.04</fontSize>
+      <color>9A9DB0</color>
+      <backgroundColor>00000000</backgroundColor>
+      <forceUppercase>true</forceUppercase>
+    </text>
+  </view>
+
+  <!-- Every game list: the background and a header strip in the system's color with its name. -->
+  <view name="basic, detailed, grid, video">
+    <image name="background" extra="true">
+      <pos>0 0</pos>
+      <size>1 1</size>
+      <path>./assets/background.png</path>
+      <zIndex>0</zIndex>
+    </image>
+
+    <image name="header" extra="true">
+      <pos>0 0</pos>
+      <size>1 0.1167</size>
+      <path>./art/${system.theme}-header.png</path>
+      <zIndex>5</zIndex>
+    </image>
+
+    <text name="systemName" extra="true">
+      <text>${system.fullName}</text>
+      <pos>0.04 0</pos>
+      <size>0.70 0.1167</size>
+      <alignment>left</alignment>
+      <fontPath>./fonts/Lato-Black.ttf</fontPath>
+      <fontSize>0.055</fontSize>
+      <color>F4F1EA</color>
+      <zIndex>6</zIndex>
+    </text>
+
+    <image name="logo">
+      <visible>false</visible>
+    </image>
+    <text name="logoText">
+      <visible>false</visible>
+    </text>
+  </view>
+
+  <view name="basic, detailed, video">
+    <textlist name="gamelist">
+      <pos>0.03 0.15</pos>
+      <size>0.53 0.75</size>
+      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontSize>0.042</fontSize>
+      <lineSpacing>1.6</lineSpacing>
+      <alignment>left</alignment>
+      <horizontalMargin>0.015</horizontalMargin>
+      <primaryColor>F4F1EA</primaryColor>
+      <secondaryColor>F5B841</secondaryColor>
+      <selectedColor>12131C</selectedColor>
+      <selectorColor>F5B841</selectorColor>
+      <selectorImagePath>./assets/selector.png</selectorImagePath>
+      <selectorImageTile>false</selectorImageTile>
+    </textlist>
+  </view>
+
+  <!-- A list without scraped data (basic) shows the placeholder where the art would be. -->
+  <view name="basic">
+    <image name="noArt" extra="true">
+      <origin>0.5 0.5</origin>
+      <pos>0.785 0.40</pos>
+      <maxSize>0.38 0.44</maxSize>
+      <path>./assets/noart.png</path>
+      <zIndex>10</zIndex>
+    </image>
+  </view>
+
+  <view name="detailed, video">
+    <image name="md_image">
+      <origin>0.5 0.5</origin>
+      <pos>0.785 0.40</pos>
+      <maxSize>0.38 0.44</maxSize>
+      <default>./assets/noart.png</default>
+      <zIndex>10</zIndex>
+    </image>
+
+    <video name="md_video">
+      <origin>0.5 0.5</origin>
+      <pos>0.785 0.40</pos>
+      <maxSize>0.38 0.44</maxSize>
+      <delay>1</delay>
+      <showSnapshotNoVideo>true</showSnapshotNoVideo>
+      <showSnapshotDelay>true</showSnapshotDelay>
+      <default>./assets/noart.png</default>
+      <zIndex>11</zIndex>
+    </video>
+
+    <image name="md_marquee, md_thumbnail">
+      <visible>false</visible>
+    </image>
+
+    <text name="md_description">
+      <pos>0.60 0.66</pos>
+      <size>0.37 0.25</size>
+      <fontPath>./fonts/Lato-Regular.ttf</fontPath>
+      <fontSize>0.032</fontSize>
+      <color>9A9DB0</color>
+      <lineSpacing>1.3</lineSpacing>
+    </text>
+
+    <!-- 640x480 has no room for the rest of the metadata. -->
+    <text name="md_name, md_lbl_rating, md_lbl_releasedate, md_lbl_developer, md_lbl_publisher, md_lbl_genre, md_lbl_players, md_lbl_lastplayed, md_lbl_playcount, md_developer, md_publisher, md_genre, md_players, md_playcount">
+      <visible>false</visible>
+    </text>
+    <datetime name="md_releasedate, md_lastplayed">
+      <visible>false</visible>
+    </datetime>
+    <rating name="md_rating">
+      <visible>false</visible>
+    </rating>
+  </view>
+
+  <!-- The grid: box art in rows of four under the header, with the selected game's name below. -->
+  <view name="grid">
+    <imagegrid name="gamegrid">
+      <pos>0.03 0.15</pos>
+      <size>0.94 0.68</size>
+      <margin>0.01 0.02</margin>
+      <autoLayout>4 2</autoLayout>
+      <autoLayoutSelectedZoom>1.06</autoLayoutSelectedZoom>
+      <gameImage>./assets/noart.png</gameImage>
+      <folderImage>./assets/noart.png</folderImage>
+    </imagegrid>
+    <gridtile name="default">
+      <backgroundColor>FFFFFF10</backgroundColor>
+      <backgroundCornerSize>10 10</backgroundCornerSize>
+      <imageColor>FFFFFFB0</imageColor>
+    </gridtile>
+    <gridtile name="selected">
+      <backgroundColor>F5B841FF</backgroundColor>
+      <imageColor>FFFFFFFF</imageColor>
+    </gridtile>
+    <text name="md_name">
+      <pos>0.03 0.84</pos>
+      <size>0.94 0.07</size>
+      <alignment>center</alignment>
+      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontSize>0.042</fontSize>
+      <color>F4F1EA</color>
+    </text>
+    <image name="md_image, md_marquee, md_thumbnail">
+      <visible>false</visible>
+    </image>
+    <text name="md_description, md_lbl_rating, md_lbl_releasedate, md_lbl_developer, md_lbl_publisher, md_lbl_genre, md_lbl_players, md_lbl_lastplayed, md_lbl_playcount, md_developer, md_publisher, md_genre, md_players, md_playcount">
+      <visible>false</visible>
+    </text>
+    <datetime name="md_releasedate, md_lastplayed">
+      <visible>false</visible>
+    </datetime>
+    <rating name="md_rating">
+      <visible>false</visible>
+    </rating>
+  </view>
+
+  <view name="system, basic, detailed, grid, video">
+    <helpsystem name="help">
+      <pos>0.03 0.935</pos>
+      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontSize>0.03</fontSize>
+      <textColor>9A9DB0</textColor>
+      <iconColor>9A9DB0</iconColor>
+    </helpsystem>
+  </view>
+</theme>
