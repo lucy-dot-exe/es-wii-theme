@@ -234,10 +234,10 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <gameImage>./assets/noart-tile.png</gameImage>
       <folderImage>./assets/noart-tile.png</folderImage>
     </imagegrid>
-    <!-- minSize: the art and the video fill the tile, cropped. The tile's bezel rounds its corners: the art can't
+    <!-- minSize: the art and the video fill the tile, cropped, inside a 3-pixel frame (tile.png). The art can't
          have roundCorners, because ES then doesn't draw the tile's video. -->
     <gridtile name="default">
-      <padding>6 6 6 6</padding>
+      <padding>3 3 3 3</padding>
       <backgroundImage>./assets/tile.png</backgroundImage>
       <backgroundCornerSize>16 16</backgroundCornerSize>
       <backgroundColor>FFFFFFFF</backgroundColor>

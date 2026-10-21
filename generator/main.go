@@ -198,17 +198,17 @@ func gridBackground() image.Image {
 	return c.done()
 }
 
-// gameTile is the nine-patch behind a game in the grid (theme.xml's backgroundCornerSize is 16 16): a white
-// bezel around the game's art, with the blue outline when it's selected.
+// gameTile is the nine-patch behind a game in the grid (theme.xml's backgroundCornerSize is 16 16): a thin frame
+// around the game's art, which fills the rest (theme.xml's padding is 3), gray with a white line inside, or the
+// blue outline when it's selected. The corners are only a little rounded so the art's square corners, 3 pixels in,
+// stay inside them: rounding the art itself would stop ES drawing the tile's video.
 func gameTile(selected bool) image.Image {
-	const n = 48.0
+	const n, r = 48.0, 7.0
 	c := newCanvas(n, n)
-	c.roundRect(0, 0, n, n, 12, frameEdge)
-	c.roundRect(1.5, 1.5, n-3, n-3, 10.5, white)
-	c.roundRect(6, 6, n-12, n-12, 5, rgb(0xEDEDED))
+	c.roundRect(0, 0, n, n, r, frameEdge)
+	c.roundRect(1.5, 1.5, n-3, n-3, r-1.5, white)
 	if selected {
-		c.ring(0, 0, n, n, 12, 3.5, blue)
-		c.ring(3.5, 3.5, n-7, n-7, 8.5, 1, withAlpha(white, 200))
+		c.ring(0, 0, n, n, r, 3, blue)
 	}
 	return c.done()
 }
