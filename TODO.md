@@ -9,3 +9,5 @@
 - [ ] Check the other resolutions in the gallery's table (480×320, 854×480, 960×544, 720×720).
 - [ ] Publish it as its own repository (`es-theme-cartridge`) and open a pull request to add it to the gallery,
       with a preview image and the resolutions it was tested at.
+- [ ] The clock overlaps the system's short name on the right of a game list's header (seen in
+      [es-preview](../es-preview/)). Move the clock, or the short name.
