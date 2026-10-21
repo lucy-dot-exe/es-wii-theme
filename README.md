@@ -4,10 +4,11 @@
 added to [Jetup13's EmulationStation OGA Theme Gallery](https://github.com/Jetup13/Emulationstation-OGA-Theme-Gallery)
 like the themes already there.
 
-It looks like the Wii's menu: a pinstriped white background with rows of channel slots, each system a glossy
-channel in its own color in the middle row, with a picture of its controller or console and its name, a blue frame
-around the selected one, and the curved dock along the bottom with the clock. Each maker's systems share a family
-of colors.
+It looks like the Wii's menu: a pinstriped white background with rows of channel slots, each system a white
+channel in the middle row, styled after Wii Sports': its short name big in its own color, its full name under it,
+and its controller or console as a big faint picture on the right. The selected one has a blue frame and slowly
+comes alive, and the curved dock runs along the bottom with the clock. Each maker's systems share a family of
+colors.
 
 A system's games are channels too: game lists open as a grid of four by three, each game's screenshot in a white
 bezel, with empty slots filling the rest of the page. Like the Wii, the tiles stay put and the blue outline moves.
@@ -49,6 +50,10 @@ the theme works straight from the repository. The colors are in both `generator/
 
 - `art/<system>.png`: the system's channel in the carousel (384×196, twice its size at 640×480). `<system>` is
   the name in `<theme>` in ArkOS's `es_systems.cfg`. A system without a channel shows its name instead.
+- `art/<system>.mp4`: the channel's animation, a three-second loop in which its picture drifts and a shine crosses
+  it, like the Wii's channels that never stand still. The system view plays the selected system's over its
+  channel once the carousel stops; its first frame is `art/<system>.png`, so it fades in without a jump. The
+  generator makes them with ffmpeg, so it needs it (`brew install ffmpeg`).
 - `art/<system>-header.png`: the band across the top of the system's game list (640×60, with its shadow).
 - `assets/menu.png`: the system view's background, with the empty slots and the dock. It and `assets/frame.png`
   (the blue frame) are `extra="static"`, so they stay still while the channels slide.

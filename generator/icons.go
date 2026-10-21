@@ -736,6 +736,32 @@ var icons = map[string]func(p pen){
 	"custom-collections": folder,
 }
 
+// drawFaint draws s's picture as a pale shape in tints of its color, at alpha, for the channel's background.
+func drawFaint(c *canvas, s System, x, y, size, alpha float64) {
+	col := rgb(s.Color)
+	ob, ol := body, light
+	body, light = shade(col, 0.55), shade(col, 0.75)
+	defer func() { body, light = ob, ol }()
+	layer := newCanvas(c.w, c.h)
+	draw := icons[s.Theme]
+	if draw == nil {
+		draw = cartridge
+	}
+	draw(pen{c: layer, x: x, y: y, s: size / 100, accent: shade(col, -0.1)})
+	b := c.img.Bounds()
+	for py := b.Min.Y; py < b.Max.Y; py++ {
+		for px := b.Min.X; px < b.Max.X; px++ {
+			l := layer.img.RGBAAt(px, py)
+			if l.A == 0 {
+				continue
+			}
+			a := float64(l.A) / 255
+			st := color.RGBA{uint8(float64(l.R) / a), uint8(float64(l.G) / a), uint8(float64(l.B) / a), uint8(float64(l.A) * alpha)}
+			c.img.SetRGBA(px, py, over(c.img.RGBAAt(px, py), st))
+		}
+	}
+}
+
 // drawIcon draws s's picture in the box (x, y, size×size) on c, with a soft shadow under it.
 func drawIcon(c *canvas, s System, x, y, size float64) {
 	layer := newCanvas(c.w, c.h)
