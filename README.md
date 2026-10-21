@@ -18,8 +18,7 @@ the games in a white panel with a light blue selector, and the box art and descr
 | ![](previews/system.png) | ![](previews/grid.png) | ![](previews/gamelist.png) |
 
 The previews are screenshots of ArkOS's EmulationStation built for macOS (see [es-preview](../es-preview/)), not
-from the console. The sample games there have their box art as the image, so the grid's preview was taken showing
-their screenshots, as a scraped card does.
+from the console.
 
 ## Installing
 
@@ -62,7 +61,8 @@ theme.xml's carousel and frame and the generator's layout constants have to chan
 the grid's `<imagegrid>` and its slots.
 
 The grid shows each game's `image`, which ES's scraper fills with a screenshot (and `thumbnail` with the box art),
-cropped to fill the tile. A card scraped with box art as the image shows the middle of each box instead.
+fitted in the tile, and plays the selected game's video in it after a second and a half. The art isn't cropped to
+fill the tile because ES doesn't show a tile's video then.
 
 ## Credits
 

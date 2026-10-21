@@ -234,13 +234,14 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <gameImage>./assets/noart-tile.png</gameImage>
       <folderImage>./assets/noart-tile.png</folderImage>
     </imagegrid>
+    <!-- maxSize: the art fits in the tile. With minSize (cropped to fill), ES doesn't show the tile's video. -->
     <gridtile name="default">
       <padding>6 6 6 6</padding>
       <backgroundImage>./assets/tile.png</backgroundImage>
       <backgroundCornerSize>16 16</backgroundCornerSize>
       <backgroundColor>FFFFFFFF</backgroundColor>
       <imageColor>FFFFFFFF</imageColor>
-      <imageSizeMode>minSize</imageSizeMode>
+      <imageSizeMode>maxSize</imageSizeMode>
     </gridtile>
     <gridtile name="selected">
       <backgroundImage>./assets/tile-selected.png</backgroundImage>
