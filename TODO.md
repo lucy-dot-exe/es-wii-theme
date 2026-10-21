@@ -1,7 +1,6 @@
 # TODO
 
-- [ ] Try it on the R36S and fix what doesn't look like the previews (taken from ES on macOS). Check the grid's
-      videos (they play in the selected tile after 0.3 s) and folders.
+- [x] Try it on the R36S: it works there as in the previews (taken from ES on macOS).
 - [ ] Take screenshots on the console (they're saved to `EASYROMS/screenshots`) and use them in the README.
 - [ ] Check every system's `<theme>` name against the `es_systems.cfg` on the card. Systems with another name
       show text instead of a card.

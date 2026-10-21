@@ -21,7 +21,7 @@ the games in a white panel with a light blue selector, and the box art and descr
 
 The previews are screenshots of ArkOS's own EmulationStation
 ([EmulationStation-fcamod](https://github.com/christianhaitian/EmulationStation-fcamod), `351v` branch) built for
-macOS, not taken on the console.
+macOS, not taken on the console. It's been tried on an R36S, where it looks the same.
 
 ## Installing
 
