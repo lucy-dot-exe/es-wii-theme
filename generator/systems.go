@@ -1,17 +1,17 @@
 package main
 
 // System is one of the systems EmulationStation can show. Theme is the name ArkOS's es_systems.cfg gives it in
-// <theme>, which is what the theme's ${system.theme} expands to, so its card is art/<Theme>.png.
+// <theme>, which is what the theme's ${system.theme} expands to, so its channel is art/<Theme>.png.
 type System struct {
 	Theme string
-	Short string // the big text on the card
+	Short string // the big text on the channel
 	Maker string
 	Name  string
-	Color uint32 // the card's color, 0xRRGGBB
+	Color uint32 // the channel's color, 0xRRGGBB
 }
 
-// The systems ArkOS lists, the same ones portable-helper's systems.go knows. Each maker's systems share a family
-// of colors, so the carousel groups by color as well as by name.
+// The systems ArkOS lists, the same ones portable-helper's systems.go knows, and ES's collections. Each maker's
+// systems share a family of colors, so the carousel groups by color as well as by name.
 var systems = []System{
 	// Nintendo
 	{"nes", "NES", "Nintendo", "Entertainment System", 0xC8102E},
@@ -133,4 +133,13 @@ var systems = []System{
 	{"lowresnx", "NX", "LowRes", "LowRes NX", 0x3AA87A},
 	{"uzebox", "UZE", "Uzebox", "Uzebox", 0x5A3AA8},
 	{"retropie", "OPT", "ArkOS", "Options", 0x50566B},
+
+	// EmulationStation's collections
+	{"auto-allgames", "ALL", "Collection", "All Games", 0x34BEED},
+	{"auto-favorites", "★", "Collection", "Favorites", 0xF2B01E},
+	{"auto-lastplayed", "RECENT", "Collection", "Last Played", 0x5AB55E},
+	{"auto-neverplayed", "NEW", "Collection", "Never Played", 0x9B6FD6},
+	{"auto-at2players", "2P", "Collection", "2 Players", 0xE8743B},
+	{"auto-at4players", "4P", "Collection", "4 Players", 0xD94F6A},
+	{"custom-collections", "MY", "Collection", "Collections", 0x3E8FD8},
 }

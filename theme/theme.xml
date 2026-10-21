@@ -1,107 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 Theme:   Cartridge
-Made for ArkOS's EmulationStation at 640x480 (R36S, RG351V, RGB10S, ...).
+Made for ArkOS's EmulationStation at 640x480 (R36S, RG351V, RGB10S, ...), in the style of the Wii's menu.
 The images in art/ and assets/ are drawn by ../generator. Change them there, not here.
 -->
 <theme>
   <formatVersion>7</formatVersion>
 
+  <!-- The clock sits in the middle, above the dock, like the Wii's. -->
   <view name="screen">
     <text name="clock">
-      <pos>0.70 0.025</pos>
-      <size>0.27 0.05</size>
-      <alignment>right</alignment>
-      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
-      <fontSize>0.035</fontSize>
-      <color>9A9DB0</color>
+      <pos>0.30 0.68</pos>
+      <size>0.40 0.085</size>
+      <alignment>center</alignment>
+      <fontPath>./fonts/MPLUSRounded1c-Medium.ttf</fontPath>
+      <fontSize>0.07</fontSize>
+      <color>A0A0A0</color>
     </text>
   </view>
 
   <view name="menu">
     <menuBackground name="menubg">
-      <color>1E2030</color>
+      <color>F7F7F7</color>
     </menuBackground>
     <menuText name="menutitle">
-      <fontPath>./fonts/Lato-Black.ttf</fontPath>
+      <fontPath>./fonts/MPLUSRounded1c-Bold.ttf</fontPath>
       <fontSize>0.05</fontSize>
-      <color>F4F1EA</color>
+      <color>505050</color>
     </menuText>
     <menuText name="menutext">
-      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
+      <fontPath>./fonts/MPLUSRounded1c-Medium.ttf</fontPath>
       <fontSize>0.04</fontSize>
-      <color>F4F1EA</color>
-      <selectorColor>F5B841</selectorColor>
-      <selectedColor>12131C</selectedColor>
-      <separatorColor>2E3145</separatorColor>
+      <color>505050</color>
+      <selectorColor>34BEED</selectorColor>
+      <selectedColor>FFFFFF</selectedColor>
+      <separatorColor>E0E0E0</separatorColor>
     </menuText>
     <menuTextSmall name="menutextsmall">
-      <fontPath>./fonts/Lato-Regular.ttf</fontPath>
+      <fontPath>./fonts/MPLUSRounded1c-Regular.ttf</fontPath>
       <fontSize>0.03</fontSize>
-      <color>9A9DB0</color>
+      <color>8C8C8C</color>
     </menuTextSmall>
     <menuText name="menufooter">
-      <fontPath>./fonts/Lato-Regular.ttf</fontPath>
+      <fontPath>./fonts/MPLUSRounded1c-Regular.ttf</fontPath>
       <fontSize>0.03</fontSize>
-      <color>9A9DB0</color>
+      <color>8C8C8C</color>
     </menuText>
   </view>
 
-  <!-- The system carousel. Each system's card is art/<system>.png; a system without one shows its name instead. -->
+  <!-- The system view: the Wii menu. The carousel is the middle row of channels; the rows above and below are
+       empty slots in the background. The background and the blue frame are static extras, so they stay put while
+       the channels slide under the frame. -->
   <view name="system">
-    <image name="background" extra="true">
+    <image name="background" extra="static">
       <pos>0 0</pos>
       <size>1 1</size>
-      <path>./assets/background.png</path>
+      <path>./assets/menu.png</path>
       <zIndex>0</zIndex>
     </image>
 
     <carousel name="systemcarousel">
       <type>horizontal</type>
-      <pos>0 0.20</pos>
-      <size>1 0.50</size>
+      <pos>0 0.2625</pos>
+      <size>1 0.2042</size>
       <color>00000000</color>
-      <logoSize>0.28 0.175</logoSize>
-      <logoScale>1.3</logoScale>
+      <logoSize>0.30 0.2042</logoSize>
+      <logoScale>1</logoScale>
       <maxLogoCount>3</maxLogoCount>
       <zIndex>40</zIndex>
     </carousel>
+
+    <image name="frame" extra="static">
+      <origin>0.5 0.5</origin>
+      <pos>0.5 0.3646</pos>
+      <size>0.325 0.2375</size>
+      <path>./assets/frame.png</path>
+      <zIndex>45</zIndex>
+    </image>
 
     <image name="logo">
       <path>./art/${system.theme}.png</path>
     </image>
 
     <text name="logoText">
-      <fontPath>./fonts/Lato-Black.ttf</fontPath>
-      <fontSize>0.07</fontSize>
-      <color>F4F1EA</color>
-      <forceUppercase>true</forceUppercase>
+      <fontPath>./fonts/MPLUSRounded1c-ExtraBold.ttf</fontPath>
+      <fontSize>0.06</fontSize>
+      <color>6A6A6A</color>
     </text>
 
+    <!-- Where the Wii shows the date. -->
     <text name="systemInfo">
-      <pos>0 0.70</pos>
-      <size>1 0.06</size>
+      <pos>0.25 0.815</pos>
+      <size>0.50 0.05</size>
       <alignment>center</alignment>
-      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
-      <fontSize>0.04</fontSize>
-      <color>9A9DB0</color>
+      <fontPath>./fonts/MPLUSRounded1c-Medium.ttf</fontPath>
+      <fontSize>0.034</fontSize>
+      <color>8C8C8C</color>
       <backgroundColor>00000000</backgroundColor>
-      <forceUppercase>true</forceUppercase>
+      <forceUppercase>false</forceUppercase>
     </text>
   </view>
 
-  <!-- Every game list: the background and a header strip in the system's color with its name. -->
+  <!-- Every game list: the system's band across the top with its name. -->
   <view name="basic, detailed, grid, video">
-    <image name="background" extra="true">
-      <pos>0 0</pos>
-      <size>1 1</size>
-      <path>./assets/background.png</path>
-      <zIndex>0</zIndex>
-    </image>
-
     <image name="header" extra="true">
       <pos>0 0</pos>
-      <size>1 0.1167</size>
+      <size>1 0.125</size>
       <path>./art/${system.theme}-header.png</path>
       <zIndex>5</zIndex>
     </image>
@@ -109,11 +113,11 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     <text name="systemName" extra="true">
       <text>${system.fullName}</text>
       <pos>0.04 0</pos>
-      <size>0.70 0.1167</size>
+      <size>0.75 0.1083</size>
       <alignment>left</alignment>
-      <fontPath>./fonts/Lato-Black.ttf</fontPath>
-      <fontSize>0.055</fontSize>
-      <color>F4F1EA</color>
+      <fontPath>./fonts/MPLUSRounded1c-Bold.ttf</fontPath>
+      <fontSize>0.05</fontSize>
+      <color>FFFFFF</color>
       <zIndex>6</zIndex>
     </text>
 
@@ -125,19 +129,27 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     </text>
   </view>
 
+  <!-- The lists: the games in the white panel on the left, the art and description in the one on the right. -->
   <view name="basic, detailed, video">
+    <image name="background" extra="true">
+      <pos>0 0</pos>
+      <size>1 1</size>
+      <path>./assets/gamelist.png</path>
+      <zIndex>0</zIndex>
+    </image>
+
     <textlist name="gamelist">
-      <pos>0.03 0.15</pos>
-      <size>0.53 0.75</size>
-      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
-      <fontSize>0.042</fontSize>
-      <lineSpacing>1.6</lineSpacing>
+      <pos>0.042 0.175</pos>
+      <size>0.50 0.49</size>
+      <fontPath>./fonts/MPLUSRounded1c-Medium.ttf</fontPath>
+      <fontSize>0.038</fontSize>
+      <lineSpacing>1.15</lineSpacing>
       <alignment>left</alignment>
       <horizontalMargin>0.015</horizontalMargin>
-      <primaryColor>F4F1EA</primaryColor>
-      <secondaryColor>F5B841</secondaryColor>
-      <selectedColor>12131C</selectedColor>
-      <selectorColor>F5B841</selectorColor>
+      <primaryColor>505050</primaryColor>
+      <secondaryColor>0D96D6</secondaryColor>
+      <selectedColor>0D86C6</selectedColor>
+      <selectorColor>FFFFFF</selectorColor>
       <selectorImagePath>./assets/selector.png</selectorImagePath>
       <selectorImageTile>false</selectorImageTile>
     </textlist>
@@ -147,8 +159,8 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
   <view name="basic">
     <image name="noArt" extra="true">
       <origin>0.5 0.5</origin>
-      <pos>0.785 0.40</pos>
-      <maxSize>0.38 0.44</maxSize>
+      <pos>0.7773 0.325</pos>
+      <maxSize>0.355 0.30</maxSize>
       <path>./assets/noart.png</path>
       <zIndex>10</zIndex>
     </image>
@@ -157,16 +169,16 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
   <view name="detailed, video">
     <image name="md_image">
       <origin>0.5 0.5</origin>
-      <pos>0.785 0.40</pos>
-      <maxSize>0.38 0.44</maxSize>
+      <pos>0.7773 0.325</pos>
+      <maxSize>0.355 0.30</maxSize>
       <default>./assets/noart.png</default>
       <zIndex>10</zIndex>
     </image>
 
     <video name="md_video">
       <origin>0.5 0.5</origin>
-      <pos>0.785 0.40</pos>
-      <maxSize>0.38 0.44</maxSize>
+      <pos>0.7773 0.325</pos>
+      <maxSize>0.355 0.30</maxSize>
       <delay>1</delay>
       <showSnapshotNoVideo>true</showSnapshotNoVideo>
       <showSnapshotDelay>true</showSnapshotDelay>
@@ -179,12 +191,12 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     </image>
 
     <text name="md_description">
-      <pos>0.60 0.66</pos>
-      <size>0.37 0.25</size>
-      <fontPath>./fonts/Lato-Regular.ttf</fontPath>
-      <fontSize>0.032</fontSize>
-      <color>9A9DB0</color>
-      <lineSpacing>1.3</lineSpacing>
+      <pos>0.605 0.508</pos>
+      <size>0.345 0.163</size>
+      <fontPath>./fonts/MPLUSRounded1c-Regular.ttf</fontPath>
+      <fontSize>0.028</fontSize>
+      <color>707070</color>
+      <lineSpacing>1.0</lineSpacing>
     </text>
 
     <!-- 640x480 has no room for the rest of the metadata. -->
@@ -199,33 +211,39 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     </rating>
   </view>
 
-  <!-- The grid: box art in rows of four under the header, with the selected game's name below. -->
+  <!-- The grid: the games as white tiles in rows of four, the selected one in blue, its name below. -->
   <view name="grid">
+    <image name="background" extra="true">
+      <pos>0 0</pos>
+      <size>1 1</size>
+      <path>./assets/grid.png</path>
+      <zIndex>0</zIndex>
+    </image>
     <imagegrid name="gamegrid">
-      <pos>0.03 0.15</pos>
-      <size>0.94 0.68</size>
-      <margin>0.01 0.02</margin>
+      <pos>0.03 0.145</pos>
+      <size>0.94 0.50</size>
+      <margin>0.012 0.02</margin>
       <autoLayout>4 2</autoLayout>
-      <autoLayoutSelectedZoom>1.06</autoLayoutSelectedZoom>
+      <autoLayoutSelectedZoom>1.04</autoLayoutSelectedZoom>
       <gameImage>./assets/noart.png</gameImage>
       <folderImage>./assets/noart.png</folderImage>
     </imagegrid>
     <gridtile name="default">
-      <backgroundColor>FFFFFF10</backgroundColor>
+      <backgroundColor>FFFFFFFF</backgroundColor>
       <backgroundCornerSize>10 10</backgroundCornerSize>
-      <imageColor>FFFFFFB0</imageColor>
+      <imageColor>FFFFFFFF</imageColor>
     </gridtile>
     <gridtile name="selected">
-      <backgroundColor>F5B841FF</backgroundColor>
+      <backgroundColor>34BEEDFF</backgroundColor>
       <imageColor>FFFFFFFF</imageColor>
     </gridtile>
     <text name="md_name">
-      <pos>0.03 0.84</pos>
-      <size>0.94 0.07</size>
+      <pos>0.03 0.655</pos>
+      <size>0.94 0.06</size>
       <alignment>center</alignment>
-      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
-      <fontSize>0.042</fontSize>
-      <color>F4F1EA</color>
+      <fontPath>./fonts/MPLUSRounded1c-Bold.ttf</fontPath>
+      <fontSize>0.04</fontSize>
+      <color>505050</color>
     </text>
     <image name="md_image, md_marquee, md_thumbnail">
       <visible>false</visible>
@@ -241,13 +259,14 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     </rating>
   </view>
 
+  <!-- The button prompts, along the bottom of the dock. -->
   <view name="system, basic, detailed, grid, video">
     <helpsystem name="help">
       <pos>0.03 0.935</pos>
-      <fontPath>./fonts/Lato-Bold.ttf</fontPath>
-      <fontSize>0.03</fontSize>
-      <textColor>9A9DB0</textColor>
-      <iconColor>9A9DB0</iconColor>
+      <fontPath>./fonts/MPLUSRounded1c-Medium.ttf</fontPath>
+      <fontSize>0.022</fontSize>
+      <textColor>7A7A7A</textColor>
+      <iconColor>34BEED</iconColor>
     </helpsystem>
   </view>
 </theme>

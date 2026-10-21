@@ -4,15 +4,18 @@
 added to [Jetup13's EmulationStation OGA Theme Gallery](https://github.com/Jetup13/Emulationstation-OGA-Theme-Gallery)
 like the themes already there.
 
-Each system is a cartridge in its own color, with its name on the label. Each maker's systems share a family of
-colors. A game list has a header in the system's color, the games on the left and the box art and description on
-the right.
+It looks like the Wii's menu: a pinstriped white background with rows of channel slots, each system a glossy
+channel in its own color in the middle row, a blue frame around the selected one, and the curved dock along the
+bottom with the clock. Each maker's systems share a family of colors. A game list has a band in the system's color
+across the top, the games in a white panel on the left with a light blue selector, and the box art and description
+in a panel on the right.
 
 | Systems | Game list |
 | --- | --- |
 | ![](previews/system.png) | ![](previews/gamelist.png) |
 
-The previews are mock-ups drawn by the generator with theme.xml's layout, not screenshots from the console.
+The previews are screenshots of ArkOS's EmulationStation built for macOS (see [es-preview](../es-preview/)), not
+from the console.
 
 ## Installing
 
@@ -28,24 +31,31 @@ On the console, pick it in **Start → UI Settings → Theme Set**.
 | Folder | What's in it |
 | --- | --- |
 | [theme/](theme/) | The theme, as it goes on the card: `theme.xml`, the fonts and the images |
-| [generator/](generator/) | A Go program that draws every image in `theme/art/` and `theme/assets/`, and the previews |
-| [previews/](previews/) | The mock-ups above |
+| [generator/](generator/) | A Go program that draws every image in `theme/art/` and `theme/assets/` |
+| [previews/](previews/) | The screenshots above |
 
-EmulationStation's SVG renderer can't draw text, so the system cards are PNGs with the text drawn on them. They
-are drawn from the table in [generator/systems.go](generator/systems.go): one row per system ArkOS lists, with
-its short name, maker, full name and color. The same systems as portable-helper's `systems.go`.
+EmulationStation's SVG renderer can't draw text, so the channels are PNGs with the text drawn on them. They are
+drawn from the table in [generator/systems.go](generator/systems.go): one row per system ArkOS lists (the same
+systems as portable-helper's `systems.go`) and per ES collection (all games, favorites, last played, ...), with its
+short name, maker, full name and color.
 
 To change the art, change the generator and run it (`cd generator && go run .`). The images are committed, so
 the theme works straight from the repository. The colors are in both `generator/main.go` and `theme/theme.xml`.
 
-- `art/<system>.png`: the system's card in the carousel (480×300). `<system>` is the name in `<theme>` in
-  ArkOS's `es_systems.cfg`. A system without a card shows its name instead.
-- `art/<system>-header.png`: the strip across the top of the system's game list (640×56).
-- `assets/background.png`, `assets/noart.png` (for games without art), `assets/selector.png` (the highlight
-  behind the selected game, tinted by theme.xml).
+- `art/<system>.png`: the system's channel in the carousel (384×196, twice its size at 640×480). `<system>` is
+  the name in `<theme>` in ArkOS's `es_systems.cfg`. A system without a channel shows its name instead.
+- `art/<system>-header.png`: the band across the top of the system's game list (640×60, with its shadow).
+- `assets/menu.png`: the system view's background, with the empty slots and the dock. It and `assets/frame.png`
+  (the blue frame) are `extra="static"`, so they stay still while the channels slide.
+- `assets/gamelist.png` (with the two panels) and `assets/grid.png`: the game lists' backgrounds.
+- `assets/selector.png` (the pill behind the selected game) and `assets/noart.png` (for games without art).
+
+The carousel shows three channels a row and the empty slots are drawn in the background at the same places, so
+theme.xml's carousel and frame and the generator's layout constants have to change together.
 
 ## Credits
 
-The font is [Lato](https://www.latofonts.com/) by Łukasz Dziedzic, under the SIL Open Font License
-([theme/fonts/OFL.txt](theme/fonts/OFL.txt)). Everything else is drawn by the generator. The cards use system
-names, never the makers' logos.
+The font is [M PLUS Rounded 1c](https://fonts.google.com/specimen/M+PLUS+Rounded+1c) by the Rounded M+ Project,
+under the SIL Open Font License ([theme/fonts/OFL.txt](theme/fonts/OFL.txt)), cut down to its Latin letters and
+symbols. Everything else is drawn by the generator. The channels use system names, never the makers' logos, and
+nothing is taken from the Wii itself.
