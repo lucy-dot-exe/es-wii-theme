@@ -1,6 +1,7 @@
-// Command generator draws the theme's images: a channel tile and a header strip for every system, the
-// backgrounds (the Wii-style menu with its empty slots and the dock, and the game list's panels), the selection
-// frame, the list's selector and the "no art" placeholder. Run it from the generator folder:
+// Command generator draws the theme's images: a channel tile (with a picture of the console, see icons.go) and a
+// header strip for every system, the backgrounds (the Wii-style menu with its empty slots and the dock, and the
+// game lists'), the selection frame, the list's selector, the grid's tiles and the "no art" placeholders. Run it
+// from the generator folder:
 //
 //	go run .
 //
@@ -99,7 +100,8 @@ func main() {
 }
 
 // channel is a system's tile in the carousel, drawn at twice the size it has on a 640×480 screen: a white bezel
-// around a face in the system's color, with a gloss across the top and the system's name on it.
+// around a face in the system's color, with a gloss across the top, the system's picture on the left and its name
+// on the right.
 func channel(s System) image.Image {
 	const k = 2
 	W, H := float64(tileW*k), float64(tileH*k)
@@ -112,26 +114,28 @@ func channel(s System) image.Image {
 	c.roundRectFn(fx, fy, fw, fh, fr, vertical(fy, fh, shade(col, 0.32), shade(col, -0.08)))
 	face := inRoundRect(fx, fy, fw, fh, fr)
 
-	// Two big faint rings on the right, like the patterns on the Wii's channels.
-	for _, r := range [][3]float64{{W * 0.86, H * 0.18, H * 0.95}, {W * 0.98, H * 0.95, H * 0.7}} {
-		cx, cy, rad := r[0], r[1], r[2]
-		c.fill(fx, fy, fw, fh, func(x, y float64) bool {
-			d := math.Hypot(x-cx, y-cy)
-			return face(x, y) && d < rad && d > rad-14
-		}, solid(withAlpha(white, 34)))
-	}
+	// A big faint ring behind the picture, like the patterns on the Wii's channels.
+	c.fill(fx, fy, fw, fh, func(x, y float64) bool {
+		d := math.Hypot(x-(fx+82), y-(fy+fh/2))
+		return face(x, y) && d < 92 && d > 78
+	}, solid(withAlpha(white, 30)))
+
+	drawIcon(c, s, fx+12, fy+(fh-148)/2, 148)
+
 	// The gloss: the top half of the face lit, fading down.
 	gy, gh := fy, fh*0.48
-	c.fill(fx, gy, fw, gh, face, vertical(gy, gh, withAlpha(white, 120), withAlpha(white, 26)))
+	c.fill(fx, gy, fw, gh, face, vertical(gy, gh, withAlpha(white, 110), withAlpha(white, 20)))
 
-	c.text(strings.ToUpper(s.Maker), "Bold", 17, fx+16, fy+28, 0.08, withAlpha(white, 215), alignLeft)
-	short := 64.0
-	if w := textWidth(s.Short, "ExtraBold", short, 0); w > fw*0.86 {
-		short *= fw * 0.86 / w
+	tx, tw := fx+174, fw-174-14 // the text, to the right of the picture
+	cx := tx + tw/2
+	c.fitText(strings.ToUpper(s.Maker), "Bold", 16, tw, cx, fy+36, withAlpha(white, 215), alignCenter)
+	short := 56.0
+	if w := textWidth(s.Short, "ExtraBold", short, 0); w > tw {
+		short *= tw / w
 	}
-	c.text(s.Short, "ExtraBold", short, W/2+2, fy+fh*0.60+3, 0, withAlpha(shade(col, -0.45), 110), alignCenter)
-	c.text(s.Short, "ExtraBold", short, W/2, fy+fh*0.60, 0, white, alignCenter)
-	c.fitText(s.Name, "Bold", 21, fw*0.88, W/2, fy+fh*0.88, withAlpha(white, 240), alignCenter)
+	c.text(s.Short, "ExtraBold", short, cx+2, fy+fh*0.63+3, 0, withAlpha(shade(col, -0.45), 110), alignCenter)
+	c.text(s.Short, "ExtraBold", short, cx, fy+fh*0.63, 0, white, alignCenter)
+	c.fitText(s.Name, "Bold", 19, tw, cx, fy+fh*0.87, withAlpha(white, 240), alignCenter)
 	return c.done()
 }
 

@@ -5,8 +5,9 @@ added to [Jetup13's EmulationStation OGA Theme Gallery](https://github.com/Jetup
 like the themes already there.
 
 It looks like the Wii's menu: a pinstriped white background with rows of channel slots, each system a glossy
-channel in its own color in the middle row, a blue frame around the selected one, and the curved dock along the
-bottom with the clock. Each maker's systems share a family of colors.
+channel in its own color in the middle row, with a picture of its controller or console and its name, a blue frame
+around the selected one, and the curved dock along the bottom with the clock. Each maker's systems share a family
+of colors.
 
 A system's games are channels too: game lists open as a grid of four by three, each game's screenshot in a white
 bezel, with empty slots filling the rest of the page. Like the Wii, the tiles stay put and the blue outline moves.
@@ -38,9 +39,10 @@ On the console, pick it in **Start → UI Settings → Theme Set**.
 | [previews/](previews/) | The screenshots above |
 
 EmulationStation's SVG renderer can't draw text, so the channels are PNGs with the text drawn on them. They are
-drawn from the table in [generator/systems.go](generator/systems.go): one row per system ArkOS lists (the same
-systems as portable-helper's `systems.go`) and per ES collection (all games, favorites, last played, ...), with its
-short name, maker, full name and color.
+drawn from the table in [generator/systems.go](generator/systems.go), with the pictures in
+[generator/icons.go](generator/icons.go) (built from shapes: a system without one gets a cartridge): one row per
+system ArkOS lists (the same systems as portable-helper's `systems.go`) and per ES collection (all games,
+favorites, last played, ...), with its short name, maker, full name and color.
 
 To change the art, change the generator and run it (`cd generator && go run .`). The images are committed, so
 the theme works straight from the repository. The colors are in both `generator/main.go` and `theme/theme.xml`.

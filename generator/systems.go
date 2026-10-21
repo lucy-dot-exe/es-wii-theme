@@ -136,7 +136,7 @@ var systems = []System{
 
 	// EmulationStation's collections
 	{"auto-allgames", "ALL", "Collection", "All Games", 0x34BEED},
-	{"auto-favorites", "★", "Collection", "Favorites", 0xF2B01E},
+	{"auto-favorites", "FAV", "Collection", "Favorites", 0xF2B01E},
 	{"auto-lastplayed", "RECENT", "Collection", "Last Played", 0x5AB55E},
 	{"auto-neverplayed", "NEW", "Collection", "Never Played", 0x9B6FD6},
 	{"auto-at2players", "2P", "Collection", "2 Players", 0xE8743B},
