@@ -6,16 +6,20 @@ like the themes already there.
 
 It looks like the Wii's menu: a pinstriped white background with rows of channel slots, each system a glossy
 channel in its own color in the middle row, a blue frame around the selected one, and the curved dock along the
-bottom with the clock. Each maker's systems share a family of colors. A game list has a band in the system's color
-across the top, the games in a white panel on the left with a light blue selector, and the box art and description
-in a panel on the right.
+bottom with the clock. Each maker's systems share a family of colors.
 
-| Systems | Game list |
-| --- | --- |
-| ![](previews/system.png) | ![](previews/gamelist.png) |
+A system's games are channels too: game lists open as a grid of four by three, each game's screenshot in a white
+bezel, with empty slots filling the rest of the page. Like the Wii, the tiles stay put and the blue outline moves.
+The list view (Start → UI Settings → Game List View → Detailed) has a band in the system's color across the top,
+the games in a white panel with a light blue selector, and the box art and description in a panel beside it.
+
+| Systems | Games | Game list (Detailed) |
+| --- | --- | --- |
+| ![](previews/system.png) | ![](previews/grid.png) | ![](previews/gamelist.png) |
 
 The previews are screenshots of ArkOS's EmulationStation built for macOS (see [es-preview](../es-preview/)), not
-from the console.
+from the console. The sample games there have their box art as the image, so the grid's preview was taken showing
+their screenshots, as a scraped card does.
 
 ## Installing
 
@@ -47,11 +51,18 @@ the theme works straight from the repository. The colors are in both `generator/
 - `art/<system>-header.png`: the band across the top of the system's game list (640×60, with its shadow).
 - `assets/menu.png`: the system view's background, with the empty slots and the dock. It and `assets/frame.png`
   (the blue frame) are `extra="static"`, so they stay still while the channels slide.
-- `assets/gamelist.png` (with the two panels) and `assets/grid.png`: the game lists' backgrounds.
+- `assets/gamelist.png` (with the two panels) and `assets/grid.png` (with an empty slot under each of the grid's
+  tiles): the game lists' backgrounds.
+- `assets/tile.png` and `assets/tile-selected.png`: the nine-patches behind a game in the grid, and
+  `assets/noart-tile.png` for a game without art there.
 - `assets/selector.png` (the pill behind the selected game) and `assets/noart.png` (for games without art).
 
 The carousel shows three channels a row and the empty slots are drawn in the background at the same places, so
-theme.xml's carousel and frame and the generator's layout constants have to change together.
+theme.xml's carousel and frame and the generator's layout constants have to change together. The same goes for
+the grid's `<imagegrid>` and its slots.
+
+The grid shows each game's `image`, which ES's scraper fills with a screenshot (and `thumbnail` with the box art),
+cropped to fill the tile. A card scraped with box art as the image shows the middle of each box instead.
 
 ## Credits
 

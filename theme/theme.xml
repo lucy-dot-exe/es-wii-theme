@@ -4,7 +4,8 @@ Theme:   Cartridge
 Made for ArkOS's EmulationStation at 640x480 (R36S, RG351V, RGB10S, ...), in the style of the Wii's menu.
 The images in art/ and assets/ are drawn by ../generator. Change them there, not here.
 -->
-<theme>
+<!-- defaultView: game lists open as the grid of channels, unless UI Settings picks another view. -->
+<theme defaultView="grid">
   <formatVersion>7</formatVersion>
 
   <!-- The clock sits in the middle, above the dock, like the Wii's. -->
@@ -211,7 +212,10 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
     </rating>
   </view>
 
-  <!-- The grid: the games as white tiles in rows of four, the selected one in blue, its name below. -->
+  <!-- The grid, the default game list: the games as channels, four by three, like the Wii's menu. The tiles stay
+       put and the blue outline moves; the background has an empty slot under each tile, so a system with few
+       games shows the rest of the page empty. The selected game's name is in the dock, where the date is in the
+       system view. -->
   <view name="grid">
     <image name="background" extra="true">
       <pos>0 0</pos>
@@ -220,30 +224,37 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <zIndex>0</zIndex>
     </image>
     <imagegrid name="gamegrid">
-      <pos>0.03 0.145</pos>
-      <size>0.94 0.50</size>
-      <margin>0.012 0.02</margin>
-      <autoLayout>4 2</autoLayout>
-      <autoLayoutSelectedZoom>1.04</autoLayoutSelectedZoom>
-      <gameImage>./assets/noart.png</gameImage>
-      <folderImage>./assets/noart.png</folderImage>
+      <pos>0.03 0.15</pos>
+      <size>0.94 0.5375</size>
+      <margin>0.01875 0.025</margin>
+      <autoLayout>4 3</autoLayout>
+      <autoLayoutSelectedZoom>1</autoLayoutSelectedZoom>
+      <imageSource>image</imageSource>
+      <showVideoAtDelay>1500</showVideoAtDelay>
+      <gameImage>./assets/noart-tile.png</gameImage>
+      <folderImage>./assets/noart-tile.png</folderImage>
     </imagegrid>
     <gridtile name="default">
+      <padding>6 6 6 6</padding>
+      <backgroundImage>./assets/tile.png</backgroundImage>
+      <backgroundCornerSize>16 16</backgroundCornerSize>
       <backgroundColor>FFFFFFFF</backgroundColor>
-      <backgroundCornerSize>10 10</backgroundCornerSize>
       <imageColor>FFFFFFFF</imageColor>
+      <imageSizeMode>minSize</imageSizeMode>
     </gridtile>
     <gridtile name="selected">
-      <backgroundColor>34BEEDFF</backgroundColor>
-      <imageColor>FFFFFFFF</imageColor>
+      <backgroundImage>./assets/tile-selected.png</backgroundImage>
     </gridtile>
+    <image name="gridtile.image">
+      <roundCorners>0.03</roundCorners>
+    </image>
     <text name="md_name">
-      <pos>0.03 0.655</pos>
-      <size>0.94 0.06</size>
+      <pos>0.20 0.80</pos>
+      <size>0.60 0.06</size>
       <alignment>center</alignment>
       <fontPath>./fonts/MPLUSRounded1c-Bold.ttf</fontPath>
-      <fontSize>0.04</fontSize>
-      <color>505050</color>
+      <fontSize>0.036</fontSize>
+      <color>707070</color>
     </text>
     <image name="md_image, md_marquee, md_thumbnail">
       <visible>false</visible>

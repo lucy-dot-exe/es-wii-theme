@@ -1,7 +1,7 @@
 # TODO
 
-- [ ] Try it on the R36S and fix what doesn't look like the previews (taken from ES on macOS), and check the grid
-      view, which hasn't been looked at since the Wii look.
+- [ ] Try it on the R36S and fix what doesn't look like the previews (taken from ES on macOS). Check the grid's
+      videos (they play in the selected tile after 1.5 s) and folders.
 - [ ] Take screenshots on the console (they're saved to `EASYROMS/screenshots`) and use them in the README.
 - [ ] Check every system's `<theme>` name against the `es_systems.cfg` on the card. Systems with another name
       show text instead of a card.

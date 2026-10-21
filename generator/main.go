@@ -61,6 +61,12 @@ const (
 	listX, listW     = 19, 336
 	panelY, panelH   = 72, 258
 	detailX, detailW = 374, 247
+
+	// The grid, the default game list: the games as channels, four by three, like the Wii's menu. <imagegrid>
+	// pos 0.03 0.15, size 0.94 0.5375, margin 0.01875 0.025, autoLayout 4 3.
+	gridX, gridY, gridW, gridH = 19.2, 72, 601.6, 258
+	gridCols, gridRows         = 4, 3
+	gridMarginX, gridMarginY   = 12, 12
 )
 
 var fonts = map[string]*opentype.Font{}
@@ -86,6 +92,9 @@ func main() {
 	save(filepath.Join(themeDir, "assets", "frame.png"), selectionFrame())
 	save(filepath.Join(themeDir, "assets", "selector.png"), selector(634, 58))
 	save(filepath.Join(themeDir, "assets", "noart.png"), noArt(300, 300))
+	save(filepath.Join(themeDir, "assets", "tile.png"), gameTile(false))
+	save(filepath.Join(themeDir, "assets", "tile-selected.png"), gameTile(true))
+	save(filepath.Join(themeDir, "assets", "noart-tile.png"), noArtTile(282, 156))
 	fmt.Printf("drew %d systems\n", len(systems))
 }
 
@@ -167,10 +176,49 @@ func gamelistBackground() image.Image {
 	return c.done()
 }
 
+// gridBackground is behind the grid: empty channel slots where the grid's tiles go, so a system with few games
+// shows the rest of the page empty, like the Wii's menu.
 func gridBackground() image.Image {
 	c := newCanvas(screenW, screenH)
 	pinstripes(c)
+	w := float64(gridW-gridMarginX*(gridCols-1)) / gridCols
+	h := float64(gridH-gridMarginY*(gridRows-1)) / gridRows
+	for row := 0; row < gridRows; row++ {
+		for col := 0; col < gridCols; col++ {
+			x, y := gridX+float64(col)*(w+gridMarginX), gridY+float64(row)*(h+gridMarginY)
+			c.roundRect(x, y, w, h, 12, slotEdge)
+			c.roundRectFn(x+1.5, y+1.5, w-3, h-3, 10.5, vertical(y, h, rgb(0xFBFBFB), rgb(0xE8E8E8)))
+		}
+	}
 	dock(c, false)
+	return c.done()
+}
+
+// gameTile is the nine-patch behind a game in the grid (theme.xml's backgroundCornerSize is 16 16): a white
+// bezel around the game's art, with the blue outline when it's selected.
+func gameTile(selected bool) image.Image {
+	const n = 48.0
+	c := newCanvas(n, n)
+	c.roundRect(0, 0, n, n, 12, frameEdge)
+	c.roundRect(1.5, 1.5, n-3, n-3, 10.5, white)
+	c.roundRect(6, 6, n-12, n-12, 5, rgb(0xEDEDED))
+	if selected {
+		c.ring(0, 0, n, n, 12, 3.5, blue)
+		c.ring(3.5, 3.5, n-7, n-7, 8.5, 1, withAlpha(white, 200))
+	}
+	return c.done()
+}
+
+// noArtTile stands in for a game without art in the grid: the empty disc, without a frame (the tile has one).
+func noArtTile(w, h int) image.Image {
+	c := newCanvas(w, h)
+	W, H := float64(w), float64(h)
+	cx, cy, r := W/2, H/2, H*0.36
+	c.fill(0, 0, W, H, func(x, y float64) bool {
+		d := math.Hypot(x-cx, y-cy)
+		return d < r && d > r*0.18
+	}, solid(rgb(0xDADADA)))
+	c.ring(cx-r, cy-r, 2*r, 2*r, r, 3, rgb(0xC8C8C8))
 	return c.done()
 }
 
