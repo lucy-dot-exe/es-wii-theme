@@ -1,5 +1,5 @@
 #!/bin/sh
-# Draws the theme's images and animations (it needs ffmpeg) and zips the theme into dist/es-theme-cartridge.zip, ready to install with
+# Draws the theme's images and zips the theme into dist/es-theme-cartridge.zip, ready to install with
 # portable-helper (Themes → Add theme) or to unzip into the card's themes folder.
 set -e
 cd "$(dirname "$0")"

@@ -84,9 +84,7 @@ func main() {
 	check(os.MkdirAll(filepath.Join(themeDir, "assets"), 0o755))
 
 	for _, s := range systems {
-		l := channelLayers(s)
-		save(filepath.Join(themeDir, "art", s.Theme+".png"), l.frame(0))
-		animate(l, filepath.Join(themeDir, "art", s.Theme+".mp4"))
+		save(filepath.Join(themeDir, "art", s.Theme+".png"), channel(s))
 		save(filepath.Join(themeDir, "art", s.Theme+"-header.png"), header(s))
 	}
 	save(filepath.Join(themeDir, "assets", "menu.png"), menuBackground())
@@ -101,53 +99,44 @@ func main() {
 	fmt.Printf("drew %d systems\n", len(systems))
 }
 
-// layers are a system's tile in the carousel, drawn at twice the size it has on a 640×480 screen: a white bezel
+// channel is a system's tile in the carousel, drawn at twice the size it has on a 640×480 screen: a white bezel
 // around a face in the system's color, with a gloss across the top, the system's picture on the left and its name
-// on the right. They're in three parts so animate.go can move the picture between them: base (the bezel and the
-// face), icon (the picture and its shadow) and top (the gloss and the text). The channel's PNG is the first frame
-// of its animation, so the video takes over from it without a jump.
-type layers struct {
-	base, icon, top *image.RGBA
-	face            func(x, y float64) bool // whether a pixel is on the face, which the shine stays inside
-}
-
-func channelLayers(s System) layers {
+// on the right.
+func channel(s System) image.Image {
 	const k = 2
 	W, H := float64(tileW*k), float64(tileH*k)
-	col := rgb(s.Color)
-	fx, fy, fw, fh, fr := 9.0, 9.0, W-18, H-18, 16.0
-	face := inRoundRect(fx, fy, fw, fh, fr)
-
 	c := newCanvas(int(W), int(H))
+	col := rgb(s.Color)
+
 	c.roundRect(0, 0, W, H, 24, frameEdge)
 	c.roundRectFn(2, 2, W-4, H-4, 22, vertical(2, H-4, white, rgb(0xECECEC)))
+	fx, fy, fw, fh, fr := 9.0, 9.0, W-18, H-18, 16.0
 	c.roundRectFn(fx, fy, fw, fh, fr, vertical(fy, fh, shade(col, 0.32), shade(col, -0.08)))
+	face := inRoundRect(fx, fy, fw, fh, fr)
+
 	// A big faint ring behind the picture, like the patterns on the Wii's channels.
 	c.fill(fx, fy, fw, fh, func(x, y float64) bool {
 		d := math.Hypot(x-(fx+82), y-(fy+fh/2))
 		return face(x, y) && d < 92 && d > 78
 	}, solid(withAlpha(white, 30)))
-	base := c.done().(*image.RGBA)
 
-	ic := newCanvas(int(W), int(H))
-	drawIcon(ic, s, fx+12, fy+(fh-148)/2, 148)
-	icon := ic.done().(*image.RGBA)
+	drawIcon(c, s, fx+12, fy+(fh-148)/2, 148)
 
-	t := newCanvas(int(W), int(H))
 	// The gloss: the top half of the face lit, fading down.
 	gy, gh := fy, fh*0.48
-	t.fill(fx, gy, fw, gh, face, vertical(gy, gh, withAlpha(white, 110), withAlpha(white, 20)))
+	c.fill(fx, gy, fw, gh, face, vertical(gy, gh, withAlpha(white, 110), withAlpha(white, 20)))
+
 	tx, tw := fx+174, fw-174-14 // the text, to the right of the picture
 	cx := tx + tw/2
-	t.fitText(strings.ToUpper(s.Maker), "Bold", 16, tw, cx, fy+36, withAlpha(white, 215), alignCenter)
+	c.fitText(strings.ToUpper(s.Maker), "Bold", 16, tw, cx, fy+36, withAlpha(white, 215), alignCenter)
 	short := 56.0
 	if w := textWidth(s.Short, "ExtraBold", short, 0); w > tw {
 		short *= tw / w
 	}
-	t.text(s.Short, "ExtraBold", short, cx+2, fy+fh*0.63+3, 0, withAlpha(shade(col, -0.45), 110), alignCenter)
-	t.text(s.Short, "ExtraBold", short, cx, fy+fh*0.63, 0, white, alignCenter)
-	t.fitText(s.Name, "Bold", 19, tw, cx, fy+fh*0.87, withAlpha(white, 240), alignCenter)
-	return layers{base, icon, t.done().(*image.RGBA), face}
+	c.text(s.Short, "ExtraBold", short, cx+2, fy+fh*0.63+3, 0, withAlpha(shade(col, -0.45), 110), alignCenter)
+	c.text(s.Short, "ExtraBold", short, cx, fy+fh*0.63, 0, white, alignCenter)
+	c.fitText(s.Name, "Bold", 19, tw, cx, fy+fh*0.87, withAlpha(white, 240), alignCenter)
+	return c.done()
 }
 
 // header is the band across the top of a system's game list, in the system's color, with a soft shadow under

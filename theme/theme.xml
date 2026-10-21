@@ -71,19 +71,6 @@ The images in art/ and assets/ are drawn by ../generator. Change them there, not
       <zIndex>40</zIndex>
     </carousel>
 
-    <!-- The selected channel's animation (the picture bobbing, a shine crossing it), over the channel once the
-         carousel stops. Its first frame is the channel's PNG, and ES fades it in, so the channel comes alive
-         without a jump. Static, so it doesn't slide with the system's extras (a screen width) while the channels
-         slide a third of one. -->
-    <video name="channelanimation" extra="static">
-      <origin>0.5 0.5</origin>
-      <pos>0.5 0.3646</pos>
-      <size>0.30 0.2042</size>
-      <path>./art/${system.theme}.mp4</path>
-      <delay>0.5</delay>
-      <zIndex>42</zIndex>
-    </video>
-
     <image name="frame" extra="static">
       <origin>0.5 0.5</origin>
       <pos>0.5 0.3646</pos>
